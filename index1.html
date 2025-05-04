@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>Learning Three.js Viewer</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      height: 100vh;
+    }
+    .sidebar {
+      width: 240px; /* 💡 기존보다 좁게 설정 */
+      background: #f4f4f4;
+      border-right: 1px solid #ccc;
+      padding: 15px;
+      overflow-y: auto;
+    }
+    .content {
+      flex-grow: 1;
+      height: 100%;
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    ul {
+      list-style-type: none;
+      padding-left: 1em;
+      margin: 0;
+    }
+    .folder > span {
+      cursor: pointer;
+      font-weight: bold;
+      color: #2c3e50;
+      display: inline-block;
+      margin-top: 10px;
+    }
+    .file {
+      margin-left: 16px;
+      color: #34495e;
+    }
+    a {
+      text-decoration: none;
+      color: #2980b9;
+      font-size: 14px;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h3>📁 LEARNING-THREEJS</h3>
+    <ul>
+      <li class="folder"><span onclick="toggle(this)">▶ chapter-01/</span>
+        <ul class="hidden">
+          <li class="file"><a href="chapter-01/01-basic-skeleton.html" target="viewer">01-basic-skeleton.html</a></li>
+          <li class="file"><a href="chapter-01/02-first-scene.html" target="viewer">02-first-scene.html</a></li>
+          <li class="file"><a href="chapter-01/03-materials-light.html" target="viewer">03-materials-light.html</a></li>
+          <li class="file"><a href="chapter-01/04-materials-light-animation.html" target="viewer">04-materials-light-animation.html</a></li>
+          <li class="file"><a href="chapter-01/05-control-gui.html" target="viewer">05-control-gui.html</a></li>
+          <li class="file"><a href="chapter-01/06-screen-size-change.html" target="viewer">06-screen-size-change.html</a></li>
+        </ul>
+      </li>
+      <!-- 더 많은 챕터는 여기에 복사/추가 -->
+      <li class="folder"><span onclick="toggle(this)">▶ chapter-02/</span>
+        <ul class="hidden">
+          <li class="file"><a href="chapter-02/01-basic-scene.html">01-basic-scene.html</a></li>
+          <li class="file"><a href="chapter-02/02-foggy-scene.html">02-foggy-scene.html</a></li>
+          <li class="file"><a href="chapter-02/03-forced-materials.html">03-forced-materials.html</a></li>
+          <li class="file"><a href="chapter-02/04-geometries.html">04-geometries.html</a></li>
+          <li class="file"><a href="chapter-02/05-custom-geometry.html">05-custom-geometry.html</a></li>
+          <li class="file"><a href="chapter-02/06-mesh-properties.html">06-mesh-properties.html</a></li>
+          <li class="file"><a href="chapter-02/07-both-cameras.html">07-both-cameras.html</a></li>
+          <li class="file"><a href="chapter-02/08-cameras-lookat.html">08-cameras-lookat.html</a></li>
+          <li class="file"><a href="chapter-02/README.md">README.md</a></li>
+        </ul>
+      </li>
+  
+      <li class="folder"><span onclick="toggle(this)">▶ chapter-03/</span>
+        <ul class="hidden">
+          <li class="file"><a href="chapter-03/01-ambient-light.html">01-ambient-light.html</a></li>
+          <li class="file"><a href="chapter-03/02-point-light.html">02-point-light.html</a></li>
+          <li class="file"><a href="chapter-03/03-spot-light.html">03-spot-light.html</a></li>
+          <li class="file"><a href="chapter-03/04-directional-light.html">04-directional-light.html</a></li>
+          <li class="file"><a href="chapter-03/05-hemisphere-light.html">05-hemisphere-light.html</a></li>
+          <li class="file"><a href="chapter-03/06-area-light.html">06-area-light.html</a></li>
+          <li class="file"><a href="chapter-03/07-lensflares.html">07-lensflares.html</a></li>
+          <li class="file"><a href="chapter-03/README.md">README.md</a></li>
+        </ul>
+      </li>
+          <li class="folder"><span onclick="toggle(this)">▶ chapter-04/</span>
+          <ul class="hidden">
+            <li class="file"><a href="./chapter-04/01-basic-mesh-material.html">01-basic-mesh-material.html</a></li>
+            <li class="file"><a href="./chapter-04/02-depth-material.html">02-depth-material.html</a></li>
+            <li class="file"><a href="./chapter-04/03-combined-material.html">03-combined-material.html</a></li>
+            <li class="file"><a href="./chapter-04/04-mesh-normal-material.html">04-mesh-normal-material.html</a></li>
+            <li class="file"><a href="./chapter-04/05-mesh-face-material.html">05-mesh-face-material.html</a></li>
+            <li class="file"><a href="./chapter-04/06-mesh-lambert-material.html">06-mesh-lambert-material.html</a></li>
+            <li class="file"><a href="./chapter-04/07-mesh-phong-material.html">07-mesh-phong-material.html</a></li>
+            <li class="file"><a href="./chapter-04/08-shader-material.html">08-shader-material.html</a></li>
+            <li class="file"><a href="./chapter-04/09-line-material.html">09-line-material.html</a></li>
+            <li class="file"><a href="./chapter-04/10-line-material-dashed.html">10-line-material-dashed.html</a></li>
+            <li class="file"><a href="./chapter-04/README.md">README.md</a></li>
+          </ul>
+        </li>
+        <li class="folder"><span onclick="toggle(this)">▶ chapter-05/</span>
+          <ul class="hidden">
+        <!-- <li class="folder">chapter-05/
+          <ul> -->
+            <li class="file"><a href="./chapter-05/01-basic-2d-geometries-plane.html">01-basic-2d-geometries-plane.html</a></li>
+            <li class="file"><a href="./chapter-05/02-basic-2d-geometries-circle.html">02-basic-2d-geometries-circle.html</a></li>
+            <li class="file"><a href="./chapter-05/03-basic-2d-geometries-shape.html">03-basic-2d-geometries-shape.html</a></li>
+            <li class="file"><a href="./chapter-05/03-basic-3d-geometries-ring.html">03-basic-3d-geometries-ring.html</a></li>
+            <li class="file"><a href="./chapter-05/04-basic-3d-geometries-cube.html">04-basic-3d-geometries-cube.html</a></li>
+            <li class="file"><a href="./chapter-05/05-basic-3d-geometries-sphere.html">05-basic-3d-geometries-sphere.html</a></li>
+            <li class="file"><a href="./chapter-05/06-basic-3d-geometries-cylinder.html">06-basic-3d-geometries-cylinder.html</a></li>
+            <li class="file"><a href="./chapter-05/07-basic-3d-geometries-torus.html">07-basic-3d-geometries-torus.html</a></li>
+            <li class="file"><a href="./chapter-05/08-basic-3d-geometries-ring.html">08-basic-3d-geometries-ring.html</a></li>
+            <li class="file"><a href="./chapter-05/09-basic-3d-geometries-torus-knot.html">09-basic-3d-geometries-torus-knot.html</a></li>
+            <li class="file"><a href="./chapter-05/10-basic-3d-geometries-polyhedron.html">10-basic-3d-geometries-polyhedron.html</a></li>
+            <li class="file"><a href="./chapter-05/README.md">README.md</a></li>
+          </ul>
+        </li>
+      
+        <li class="folder"><span onclick="toggle(this)">▶ chapter-06/</span>
+          <ul class="hidden">
+            <li class="file"><a href="./chapter-06/01-advanced-3d-geometries-convex.html">01-advanced-3d-geometries-convex.html</a></li>
+            <li class="file"><a href="./chapter-06/02-advanced-3d-geometries-lathe.html">02-advanced-3d-geometries-lathe.html</a></li>
+            <li class="file"><a href="./chapter-06/03-extrude-geometry.html">03-extrude-geometry.html</a></li>
+            <li class="file"><a href="./chapter-06/04-extrude-tube.html">04-extrude-tube.html</a></li>
+            <li class="file"><a href="./chapter-06/05-extrude-svg.html">05-extrude-svg.html</a></li>
+            <li class="file"><a href="./chapter-06/06-parametric-geometries.html">06-parametric-geometries.html</a></li>
+            <li class="file"><a href="./chapter-06/07-text-geometry.html">07-text-geometry.html</a></li>
+            <li class="file"><a href="./chapter-06/08-binary-operations.html">08-binary-operations.html</a></li>
+            <li class="file"><a href="./chapter-06/README.md">README.md</a></li>
+          </ul>
+      </li>
+          
+    <li class="folder"><span onclick="toggle(this)">▶ chapter-08/</span>
+      <ul class="hidden">
+        <li class="file"><a href="./chapter-08/01-grouping.html">01-grouping.html</a></li>
+        <li class="file"><a href="./chapter-08/02-merging.html">02-merging.html</a></li>
+        <li class="file"><a href="./chapter-08/03-load-save-json-object.html">03-load-save-json-object.html</a></li>
+        <li class="file"><a href="./chapter-08/04-load-save-json-scene.html">04-load-save-json-scene.html</a></li>
+        <li class="file"><a href="./chapter-08/05-blender-from-json.html">05-blender-from-json.html</a></li>
+        <li class="file"><a href="./chapter-08/06-load-obj.html">06-load-obj.html</a></li>
+        <li class="file"><a href="./chapter-08/07-load-obj-mtl.html">07-load-obj-mtl.html</a></li>
+        <li class="file"><a href="./chapter-08/08-load-collada.html">08-load-collada.html</a></li>
+        <li class="file"><a href="./chapter-08/09-load-stl.html">09-load-stl.html</a></li>
+        <li class="file"><a href="./chapter-08/10-load-ctm.html">10-load-ctm.html</a></li>
+        <li class="file"><a href="./chapter-08/11-load-vtk.html">11-load-vtk.html</a></li>
+        <li class="file"><a href="./chapter-08/12-load-pdb.html">12-load-pdb.html</a></li>
+        <li class="file"><a href="./chapter-08/13-load-PLY.html">13-load-PLY.html</a></li>
+        <li class="file"><a href="./chapter-08/14-load-awd.html">14-load-awd.html</a></li>
+        <li class="file"><a href="./chapter-08/15-load-assimp.html">15-load-assimp.html</a></li>
+        <li class="file"><a href="./chapter-08/16-load-vrml.html">16-load-vrml.html</a></li>
+        <li class="file"><a href="./chapter-08/17-load-babylon.html">17-load-babylon.html</a></li>
+        <li class="file"><a href="./chapter-08/README.md">README.md</a></li>
+      </ul>
+    </li>
+    
+    <li class="folder"><span onclick="toggle(this)">▶ chapter-09/</span>
+      <ul class="hidden">
+        <li class="file"><a href="./chapter-09/01-basic-animation.html">01-basic-animation.html</a></li>
+        <li class="file"><a href="./chapter-09/02-selecting-objects.html">02-selecting-objects.html</a></li>
+        <li class="file"><a href="./chapter-09/03-animation-tween.html">03-animation-tween.html</a></li>
+        <li class="file"><a href="./chapter-09/04-trackball-controls-camera.html">04-trackball-controls-camera.html</a></li>
+        <li class="file"><a href="./chapter-09/05-fly-controls-camera.html">05-fly-controls-camera.html</a></li>
+        <li class="file"><a href="./chapter-09/06-roll-controls-camera.html">06-roll-controls-camera.html</a></li>
+        <li class="file"><a href="./chapter-09/07-first-person-camera.html">07-first-person-camera.html</a></li>
+        <li class="file"><a href="./chapter-09/08-controls-orbit.html">08-controls-orbit.html</a></li>
+        <li class="file"><a href="./chapter-09/10-morph-targets.html">10-morph-targets.html</a></li>
+        <li class="file"><a href="./chapter-09/11-morph-targets-manually.html">11-morph-targets-manually.html</a></li>
+        <li class="file"><a href="./chapter-09/12-bones-manually.html">12-bones-manually.html</a></li>
+        <li class="file"><a href="./chapter-09/13-animation-from-blender.html">13-animation-from-blender.html</a></li>
+        <li class="file"><a href="./chapter-09/14-animation-from-collada.html">14-animation-from-collada.html</a></li>
+        <li class="file"><a href="./chapter-09/15-animation-from-md2.html">15-animation-from-md2.html</a></li>
+        <li class="file"><a href="./chapter-09/16-animation-from-gltf.html">16-animation-from-gltf.html</a></li>
+        <li class="file"><a href="./chapter-09/README.md">README.md</a></li>
+      </ul>
+    </li>
+    
+    <li class="folder"><span onclick="toggle(this)">▶ chapter-10/</span>
+      <ul class="hidden">
+        <li class="file"><a href="./chapter-10/##-basic-fragment-shader.html">##-basic-fragment-shader.html</a></li>
+        <li class="file"><a href="./chapter-10/##-basic-vertex-shader.html">##-basic-vertex-shader.html</a></li>
+        <li class="file"><a href="./chapter-10/##-env-map-dynamic.html">##-env-map-dynamic.html</a></li>
+        <li class="file"><a href="./chapter-10/##-normal-obj-mtl.html">##-normal-obj-mtl.html</a></li>
+        <li class="file"><a href="./chapter-10/01-basic-texture-dds.html">01-basic-texture-dds.html</a></li>
+        <li class="file"><a href="./chapter-10/01-basic-texture-pvr.html">01-basic-texture-pvr.html</a></li>
+        <li class="file"><a href="./chapter-10/01-basic-texture-tga.html">01-basic-texture-tga.html</a></li>
+        <li class="file"><a href="./chapter-10/01-basic-texture.html">01-basic-texture.html</a></li>
+        <li class="file"><a href="./chapter-10/02-bump-map.html">02-bump-map.html</a></li>
+        <li class="file"><a href="./chapter-10/03-normal-map.html">03-normal-map.html</a></li>
+        <li class="file"><a href="./chapter-10/04-light-map.html">04-light-map.html</a></li>
+        <li class="file"><a href="./chapter-10/05-env-map-dynamic.html">05-env-map-dynamic.html</a></li>
+        <li class="file"><a href="./chapter-10/05-env-map-static.html">05-env-map-static.html</a></li>
+        <li class="file"><a href="./chapter-10/06-specular-map.html">06-specular-map.html</a></li>
+        <li class="file"><a href="./chapter-10/07-uv-mapping-manual.html">07-uv-mapping-manual.html</a></li>
+        <li class="file"><a href="./chapter-10/07-uv-mapping.html">07-uv-mapping.html</a></li>
+        <li class="file"><a href="./chapter-10/08-repeat-wrapping.html">08-repeat-wrapping.html</a></li>
+        <li class="file"><a href="./chapter-10/09-canvas-texture.html">09-canvas-texture.html</a></li>
+        <li class="file"><a href="./chapter-10/10-canvas-texture-bumpmap.html">10-canvas-texture-bumpmap.html</a></li>
+        <li class="file"><a href="./chapter-10/11-video-texture-alternative.html">11-video-texture-alternative.html</a></li>
+        <li class="file"><a href="./chapter-10/11-video-texture.html">11-video-texture.html</a></li>
+        <li class="file"><a href="./chapter-10/README.md">README.md</a></li>
+      </ul>
+    </li>
+    
+    <li class="folder"><span onclick="toggle(this)">▶ chapter-11/</span>
+      <ul class="hidden">
+        <li class="file"><a href="./chapter-11/01-basic-effect-composer.html">01-basic-effect-composer.html</a></li>
+        <li class="file"><a href="./chapter-11/02-post-processing-simple-passes.html">02-post-processing-simple-passes.html</a></li>
+        <li class="file"><a href="./chapter-11/03-glitch-pass.html">03-glitch-pass.html</a></li>
+        <li class="file"><a href="./chapter-11/03-post-processing-masks.html">03-post-processing-masks.html</a></li>
+        <li class="file"><a href="./chapter-11/04-shaderpass-simple.html">04-shaderpass-simple.html</a></li>
+        <li class="file"><a href="./chapter-11/05-shaderpass-blur.html">05-shaderpass-blur.html</a></li>
+        <li class="file"><a href="./chapter-11/06-shaderpass-advanced.html">06-shaderpass-advanced.html</a></li>
+        <li class="file"><a href="./chapter-11/07-shaderpass-custom.html">07-shaderpass-custom.html</a></li>
+        <li class="file"><a href="./chapter-11/custom-shader.js">custom-shader.js</a></li>
+        <li class="file"><a href="./chapter-11/snippet.js">snippet.js</a></li>
+        <li class="file"><a href="./chapter-11/README.md">README.md</a></li>
+      </ul>
+    </li>
+    
+    <li class="folder"><span onclick="toggle(this)">▶ chapter-12/</span>
+      <ul class="hidden">
+        <li class="file"><a href="./chapter-12/01-basic-scene.html">01-basic-scene.html</a></li>
+        <li class="file"><a href="./chapter-12/02-material-properties.html">02-material-properties.html</a></li>
+        <li class="file"><a href="./chapter-12/03-shapes.html">03-shapes.html</a></li>
+        <li class="file"><a href="./chapter-12/04-constraints.html">04-constraints.html</a></li>
+        <li class="file"><a href="./chapter-12/05-dof-constraint.html">05-dof-constraint.html</a></li>
+        <li class="file"><a href="./chapter-12/06-audio.html">06-audio.html</a></li>
+        <li class="file"><a href="./chapter-12/hinge.html">hinge.html</a></li>
+        <li class="file"><a href="./chapter-12/README.md">README.md</a></li>
+      </ul>
+    </li>
+  
+    </ul>
+  </div>
+
+  <div class="content">
+    <iframe name="viewer" src=""></iframe>
+  </div>
+
+  <script>
+    function toggle(elem) {
+      const folder = elem.nextElementSibling;
+      folder.classList.toggle("hidden");
+      elem.textContent = folder.classList.contains("hidden")
+        ? "▶ " + elem.textContent.slice(2)
+        : "▼ " + elem.textContent.slice(2);
+    }
+  </script>
+</body>
+</html>
